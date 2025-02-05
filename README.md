@@ -27,3 +27,8 @@ O **Algoritmo Circular** (ou *Circular Wait Prevention*) previne *deadlocks* imp
 - Testes e estudos de caso
 
 📌 **Ideal para estudantes e profissionais que desejam entender e aplicar técnicas de gerenciamento de recursos em sistemas concorrentes!**
+
+## Colaboradores:
+- Iglésio Oliveira de Carvalho
+- Kaio Gabriel de Sousa Carvalho
+- Arthur Vieira Melo Silva
