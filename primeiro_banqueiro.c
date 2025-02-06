@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <locale.h>
@@ -24,7 +25,7 @@ void imprimir_estado_atual(int disponibilidade[], int processos[][NUM_RECURSOS],
     
     printf("\nProcessos (Alocação Atual):\n");
     for (int i = 0; i < NUM_PROCESSOS; i++) {
-        printf("P%d: ", i);
+        printf("P%d: ", i+1);
         for (int j = 0; j < NUM_RECURSOS; j++) {
             printf("%d ", processos[i][j]);
         }
@@ -33,22 +34,13 @@ void imprimir_estado_atual(int disponibilidade[], int processos[][NUM_RECURSOS],
     
     printf("\nRecursos Máximos Necessários:\n");
     for (int i = 0; i < NUM_PROCESSOS; i++) {
-        printf("P%d: ", i);
+        printf("P%d: ", i+1);
         for (int j = 0; j < NUM_RECURSOS; j++) {
             printf("%d ", recursos[i][j]);
         }
         printf("\n");
     }
     
-    printf("\nNecessidade Restante:\n");
-    for (int i = 0; i < NUM_PROCESSOS; i++) {
-        printf("P%d: ", i);
-        for (int j = 0; j < NUM_RECURSOS; j++) {
-            printf("%d ", necessidade[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
 }
 
 void algoritmo_banqueiro(int disponibilidade[], int processos[][NUM_RECURSOS], int recursos[][NUM_RECURSOS]) {
@@ -75,11 +67,11 @@ void algoritmo_banqueiro(int disponibilidade[], int processos[][NUM_RECURSOS], i
 
         for (int i = 0; i < NUM_PROCESSOS; i++) {
             if (!finalizado[i] && pode_atender(necessidade[i], disponivel)) {
-                printf("\nProcesso P%d pode ser atendido. Recursos alocados:\n", i);
+                printf("\nProcesso P%d pode ser atendido. Recursos alocados:\n", i+1);
                 for (int j = 0; j < NUM_RECURSOS; j++) {
                     printf("%d ", processos[i][j]);
                 }
-                printf("\nLiberando recursos após execução do processo P%d\n", i);
+                printf("\nLiberando recursos após execução do processo P%d\n", i+1);
                 
                 for (int j = 0; j < NUM_RECURSOS; j++) {
                     disponivel[j] += processos[i][j];
@@ -105,23 +97,23 @@ void algoritmo_banqueiro(int disponibilidade[], int processos[][NUM_RECURSOS], i
 
     printf("\nO sistema está em um estado seguro. Sequência segura:\n");
     for (int i = 0; i < NUM_PROCESSOS; i++) {
-        printf("P%d ", sequencia_segura[i]);
+        printf("P%d ", sequencia_segura[i]+1);
     }
     printf("\n");
 }
 
 int main() {
     setlocale(LC_ALL, "pt_BR.UTF-8");
-    int disponibilidade[] = {3, 1, 1, 2};
+    int disponibilidade[] = {2, 1, 0, 0};
     int processos[NUM_PROCESSOS][NUM_RECURSOS] = {
-        {1, 2, 2, 1}, 
-        {1, 0, 3, 3}, 
-        {1, 1, 1, 0}
+        {0, 0, 1, 0}, 
+        {2, 0, 0, 1}, 
+        {0, 1, 2, 0}
     };
     int recursos[NUM_PROCESSOS][NUM_RECURSOS] = {
-        {3, 3, 2, 2},
-        {1, 2, 3, 4},
-        {1, 1, 5, 0}
+        {2, 0, 0, 1},
+        {1, 0, 1, 0},
+        {2, 1, 0, 1}
     };
 
     algoritmo_banqueiro(disponibilidade, processos, recursos);
